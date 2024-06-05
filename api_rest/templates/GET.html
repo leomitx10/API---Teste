@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+</head>
+<body>
+    <h1>User Details</h1>
+    <form id="searchForm" action="{% url 'user_manager' %}" method="GET">
+        <label for="nickname">Nickname:</label>
+        <input type="text" id="nickname" name="user"><br><br>
+        <button type="submit">Buscar</button>
+    </form>
+
+    <div id="userInfo"></div>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            var formData = new FormData(this);
+
+            fetch(this.getAttribute('action') + '?' + new URLSearchParams(formData), {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display user information below the form
+                var userInfoDiv = document.getElementById('userInfo');
+                userInfoDiv.innerHTML = ''; // Clear previous results
+
+                // Assuming data is an object with key-value pairs
+                for (var key in data) {
+                    var userInfo = document.createElement('p');
+                    userInfo.textContent = key + ': ' + data[key];
+                    userInfoDiv.appendChild(userInfo);
+                }
+            })
+            .catch(error => console.error('Error fetching user data:', error));
+        });
+    </script>
+</body>
+</html>

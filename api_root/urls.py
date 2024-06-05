@@ -17,7 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
+from api_rest.views import minha_view, minha_view_post
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api_rest.urls'),name='api_rest_urls'),
+    path('get/', minha_view, name='meu_link'),
+    path('post/', minha_view_post, name='meu_linkd'),
+    
 ]

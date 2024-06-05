@@ -102,3 +102,9 @@ def user_manager(request):
         except:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         
+def minha_view(request):
+    return render(request, 'GET.html')
+
+def minha_view_post(request):
+    return render(request, 'POST.html')
+        

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create User</title>
+</head>
+<body>
+    <h1>Create User Details</h1>
+    <form action="{% url 'user_manager' %}" method="POST">
+        {% csrf_token %}
+        <label for="user_nickname">Nickname:</label>
+        <input type="text" id="user_nickname" name="user_nickname"><br><br>
+        <label for="user_name">Name:</label>
+        <input type="text" id="user_name" name="user_name"><br><br>
+        <label for="user_email">Email:</label>
+        <input type="text" id="user_email" name="user_email"><br><br>
+        <label for="user_age">Age:</label>
+        <input type="text" id="user_age" name="user_age"><br><br>
+        <button type="submit">Criar</button>
+    </form>
+</body>
+</html>
